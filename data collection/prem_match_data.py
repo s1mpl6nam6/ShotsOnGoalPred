@@ -15,10 +15,9 @@ headers.update({
 
 
 def main():
-
     count = 0
-    finaldataset = []
-    years = [2024, 2025]
+    final_dataset = []
+    years = [2019, 2020, 2021, 2022, 2023, 2024, 2025]
     for year in years:
         for week in range(38):
             data = get_fetch_url(year, week)
@@ -31,11 +30,11 @@ def main():
                     continue
                 for stat in shots_on:
                     match_[stat["side"] + "_shots_on_target"] = stat["shots_on_target"]
-                    finaldataset.append(match_)
+                final_dataset.append(match_)
                 count += 1
             if count % 50 == 0:
                 print(f"{count} matches processed, year: {year}, week: {week}")
-    df = pd.DataFrame(finaldataset)
+    df = pd.DataFrame(final_dataset)
     df.to_csv("shots_per_match.csv", index=False)
             
 
